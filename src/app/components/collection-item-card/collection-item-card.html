@@ -1,19 +1,19 @@
 <article class="collection-item-card">
-    <span class="rarity-chip">Legendary</span>
+    <span class="rarity-chip">{{rarity()}}</span>
 
     <figure class="item-image">
         <img src="./favicon.ico" alt="Diamond">
     </figure>
 
     <header class="item-header">
-        <h2 class="item-name">Excalibur</h2>
+        <h2 class="item-name">{{name()}}</h2>
     </header>
 
     <p class="item-description">
-        A legendary sword of unmatched sharpness and history.
+        {{description()}}
     </p>
 
     <footer>
-        <p class="item-price">$199</p>
+        <p class="item-price">${{price()}}</p>
     </footer>
 </article>
