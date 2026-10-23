@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { CollectionItem } from '../../models/collection-item';
 
 @Component({
   imports: [],
@@ -7,9 +8,6 @@ import { Component, input } from '@angular/core';
   templateUrl: './collection-item-card.html',
 })
 export class CollectionItemCard {
-  rarity = input("Legendary");
-  name = input("Excalibur");
-  description = input("A legendary sword of unmatched sharpness and history.");
-  price = input(199);
+  item = input(new CollectionItem());
 
 }
