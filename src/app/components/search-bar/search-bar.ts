@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output, OutputEmitterRef } from '@angular/core';
 
 @Component({
   imports: [],
@@ -6,4 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './search-bar.scss',
   templateUrl: './search-bar.html',
 })
-export class SearchBar {}
+export class SearchBar {
+
+  searchButtonClicked: OutputEmitterRef<void> = output<void>();
+  
+  searchClicked() {
+    this.searchButtonClicked.emit();
+  }
+}
