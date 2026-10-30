@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 import { CollectionItem } from './models/collection-item';
@@ -11,8 +11,11 @@ import { SearchBar } from './components/search-bar/search-bar';
   templateUrl: './app.html',
 })
 export class App {
+
   coin! : CollectionItem;
   count = 0;
+
+  searchText = "";
 
   constructor(){
 
