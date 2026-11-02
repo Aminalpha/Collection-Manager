@@ -14,6 +14,7 @@
 
 
 <section class="collection-grid">
-  <app-collection-item-card></app-collection-item-card>
-  <app-collection-item-card [item] = "coin"></app-collection-item-card>
+  <app-collection-item-card [item] = "selectedItem()"></app-collection-item-card>
 </section>
+
+<button (click)="incrementIndex()">Toggle</button>
