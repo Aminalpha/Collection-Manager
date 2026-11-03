@@ -16,9 +16,14 @@
   @for (item of collectionItem(); track item.name) {
     <app-collection-item-card [item]="item"></app-collection-item-card>
   }
-  @empty {
-    <div>Not found</div>
-  }
  </section>
+ 
+ @let itemsCount = collectionItem()?.length;
+
+ @if (itemsCount) {
+  <div class="centered"> Found {{itemsCount}} results</div>
+ }@else {
+  <div class="centered"> No items found</div>
+ }
 
 
