@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, model, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 import { CollectionItem } from './models/collection-item';
 import { SearchBar } from './components/search-bar/search-bar';
+import { Collection } from './models/collection';
 
 @Component({
   imports: [RouterOutlet, CollectionItemCard, SearchBar],
@@ -15,20 +16,24 @@ export class App {
 
   coin! : CollectionItem;
   linx! : CollectionItem;
-  
-  count = 0;
-  searchText = "";
+  stamp! : CollectionItem;
 
-  itemList: CollectionItem[] = [];
-  selectedItemIndex = signal(0);
-  selectedItem = computed(()=>{
-      return this.itemList[this.selectedItemIndex()];
+  search = model("");
+
+  selectedCollection = signal<Collection | null>(null);
+  
+  collectionItem = computed(
+    () => {
+      const allItems = this.selectedCollection()?.items;
+      return allItems?.filter(item => 
+                              item.name.toLowerCase()
+                              .includes( this.search()
+                              .toLowerCase())
+                            )
     }
   );
 
-  logEffect = effect(()=>{
-    console.log(this.selectedItemIndex(), this.selectedItem());
-  })
+
 
   constructor(){
 
@@ -39,24 +44,25 @@ export class App {
     this.coin.price = 799;
 
     this.linx = new CollectionItem();
+
+    this.stamp = new CollectionItem();
+    this.stamp.name = "Vieux timbre";
+    this.stamp.description = "Un vieux timbre.";
+    this.stamp.rarity = "Rare";
+    this.stamp.price = 777;
     
-    this.itemList = [
+    const defaultCollection = new Collection();
+    defaultCollection.title = "Default collection";
+    defaultCollection.items = [
       this.coin,
-      this.linx
+      this.linx,
+      this.stamp
     ]
+
+    this.selectedCollection.set(defaultCollection);
+
+
   }
 
-  incrementCount(){
-    this.count++;
-  }
 
-  incrementIndex(){
-
-    this.selectedItemIndex.update(
-      (news) => {
-        return (news+1) % 2
-      }
-
-    );
-  }
 }
