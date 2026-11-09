@@ -10,6 +10,7 @@ export class Collection {
         const copiedCollection = Object.assign(new Collection, this);
         copiedCollection.items = this.items.map(
             item => item.copy()
-        )
+        );
+        return copiedCollection;
     }
 }

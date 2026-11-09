@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input, model, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, model, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 import { CollectionItem } from './models/collection-item';
 import { SearchBar } from './components/search-bar/search-bar';
 import { Collection } from './models/collection';
+import { CollectionService } from './services/collection-service';
 
 @Component({
   imports: [RouterOutlet, CollectionItemCard, SearchBar],
@@ -14,6 +15,7 @@ import { Collection } from './models/collection';
 })
 export class App {
 
+  private collectionService = inject(CollectionService);
   coin! : CollectionItem;
   linx! : CollectionItem;
   stamp! : CollectionItem;
@@ -21,7 +23,7 @@ export class App {
   search = model("");
 
   selectedCollection = signal<Collection | null>(null);
-  
+
   collectionItem = computed(
     () => {
       const allItems = this.selectedCollection()?.items;
@@ -61,6 +63,7 @@ export class App {
 
     this.selectedCollection.set(defaultCollection);
 
+    this.collectionService.hello();
 
   }
 
