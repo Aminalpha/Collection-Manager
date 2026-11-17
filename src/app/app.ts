@@ -16,9 +16,7 @@ import { CollectionService } from './services/collection-service';
 export class App {
 
   private collectionService = inject(CollectionService);
-  coin! : CollectionItem;
-  linx! : CollectionItem;
-  stamp! : CollectionItem;
+
 
   search = model("");
 
@@ -37,33 +35,22 @@ export class App {
 
 
 
-  constructor(){
+  constructor() {
+    const allCollections = this.collectionService.getAll();
 
-    this.coin = new CollectionItem();
-    this.coin.rarity = "Commune";
-    this.coin.name = "Pièce de 1972";
-    this.coin.description = "Pièce de 50 centimes";
-    this.coin.price = 799;
+    if(allCollections.length > 0){
+      this.selectedCollection.set(allCollections[0]);
+    }
+  }
 
-    this.linx = new CollectionItem();
-
-    this.stamp = new CollectionItem();
-    this.stamp.name = "Vieux timbre";
-    this.stamp.description = "Un vieux timbre.";
-    this.stamp.rarity = "Rare";
-    this.stamp.price = 777;
-    
-    const defaultCollection = new Collection();
-    defaultCollection.title = "Default collection";
-    defaultCollection.items = [
-      this.coin,
-      this.linx,
-      this.stamp
-    ]
-
-    this.selectedCollection.set(defaultCollection);
-
-    this.collectionService.hello();
+  addGenericItem() {
+    const collection = this.selectedCollection();
+    if(collection){
+        const storedCollection = this.collectionService.addItem(
+        collection, new CollectionItem());
+        
+        this.selectedCollection.set(storedCollection);
+    }
 
   }
 

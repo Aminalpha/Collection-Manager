@@ -9,5 +9,5 @@ export class CollectionItem {
     copy(){
         return Object.assign(new CollectionItem(), this);
     }
-    
+
 }

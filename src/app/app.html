@@ -31,6 +31,7 @@
       @default {
         <app-collection-item-card [item]="item"></app-collection-item-card>
       }
+
     }
   }
 
@@ -44,4 +45,7 @@
   <div class="centered"> No items found</div>
  }
 
-
+ <div class="centered">
+  <button (click)="addGenericItem()">Add item</button>
+ </div>
+ 
