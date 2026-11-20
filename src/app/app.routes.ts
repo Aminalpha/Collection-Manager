@@ -18,7 +18,17 @@ export const routes: Routes = [
 
     {
         path: "item",
-        component: CollectionItemDetail
+        children: [
+            {
+                path: "",
+                component: CollectionItemDetail
+            },
+            {
+                path: ":id",
+                component: CollectionItemDetail
+            }
+        ]
+        
     },
 
     {

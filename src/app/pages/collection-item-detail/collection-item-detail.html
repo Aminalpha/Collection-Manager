@@ -1,1 +1,7 @@
-<p>collection-item-detail works!</p>
+@if(itemId()){
+    Item {{itemId()}}!
+    <button (click)="next()">Next</button>
+}
+@else{
+    New item!
+}
